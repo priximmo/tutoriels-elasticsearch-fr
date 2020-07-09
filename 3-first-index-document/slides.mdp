@@ -1,0 +1,103 @@
+%title: ELASTIC - Première création
+%author: xavki
+
+
+
+
+
+
+-> Curl <-
+=========
+
+
+
+
+<br>
+* GET : récupérer de la data
+
+* PUT : création de data
+
+* POST : mise à jour
+
+* _bulk : enchainer les insertions
+
+
+exemples:...
+
+---------------------------------------------------
+
+
+
+
+
+
+-> PING <-
+
+
+
+* ping
+
+
+```
+curl -X GET "localhost:9200/"
+```
+
+---------------------------------------------------
+
+
+
+-> Création d'index (database) et son mapping <-
+
+
+
+* création d'index
+
+- type (table) : utilisateurs
+- propriétés (champs) : nom/prénom/ville
+
+```
+curl -X PUT 'http://127.0.0.1:9200/xavki' -d '
+  { "mappings": {
+    "utilisateurs" : {
+      "properties" : {
+  "nom" : {"type":"string"},
+  "prenom" : {"type":"string"},
+  "ville": {"type":"string"}
+}}}}'
+```
+
+---------------------------------------------------
+
+
+
+
+-> Insertion de datas (méthode bulk) <-
+
+
+
+* définir un id pour chaque ligne
+
+```
+curl -X POST 'http://localhost:9200/_bulk' -d '
+{ "create" : { "_index" : "xavki", "_type" : "utilisateurs", "_id": 1 } }
+{"nom": "xavier", "prenom": "blog", "ville" : "Caen"}
+{ "create" : { "_index" : "xavki", "_type" : "utilisateurs", "_id": 2 } }
+{"nom": "Michu", "prenom": "Paul", "ville" : "Lyon"}
+{ "create" : { "_index" : "xavki", "_type" : "utilisateurs", "_id": 3 } }
+{"nom": "Michalon", "prenom": "Pierre", "ville" : "Marseille"}'
+
+```
+
+
+
+---------------------------------------------------
+
+
+
+
+-> Interrogation (select) <-
+
+
+```
+curl -X GET "localhost:9200/xavki/utilisateurs/1"
+```

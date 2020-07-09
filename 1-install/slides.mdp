@@ -1,0 +1,62 @@
+%title: ELASTIC - Installation
+%author: xavki
+
+
+
+
+-> Intêrêts <-
+=========
+
+* nosql : atout principal c'est la facilité à disposer d'un système distribué
+
+<br>
+Principaux:
+
+* elasticsearch : capacité/qualité d'indexation et donc de recherche
+
+* cassandra : gros volumes
+
+* mongodb : la plus polyvalente
+
+* redis : in memory donc très rapide (requêtage limité)
+
+<br>
+Elasticsearch :
+	* indexation de tous les mots des documents
+	* qualité de la recherche
+		- TF (Terme Frequency) : fréquence des mots
+		- IDF (Inverse Difference Frequency) : moins un mot est commun plus il a de poids dans la recherche 
+
+=> intérêt important dans ELK (Elasticsearch Logstash Kibana) : analyse de logs
+
+-----------------------------------------------------------------------------------------
+
+-> Installation <-
+=========
+
+* download du .deb
+
+```
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.2.deb
+```
+
+* install du .deb
+
+```
+sudo dpkg -i elasticsearch-6.5.2.deb
+```
+
+* test du port d'écoute
+
+```
+sudo netstat -ntaup | grep 9200
+```
+
+* premier curl vers 9200
+```
+curl -X GET "localhost:9200/"
+```
+
+
+
+

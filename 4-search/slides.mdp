@@ -1,0 +1,49 @@
+%title: ELASTIC - la recherche
+%author: xavki
+
+
+
+
+
+
+-> Search : un type <-
+=========
+
+<br>
+- recherche dans tout le type (toutes les propriétés/les champs)
+
+<br>
+- index : xavki
+- type (table) : utilisateurs
+- propriétés (champs) : nom/prénom/ville
+
+<br>
+Recherche dans un type :
+
+```
+curl -X GET "127.0.0.1:9200/xavki/utilisateurs/_search?q=blog" | jq
+```
+
+Rq : jq permet remise en forme du json
+
+----------------------------------------------------------------------------
+
+-> Search : contenu d'un type
+
+Pour afficher tous les éléments du type :
+
+```
+curl -X GET "127.0.0.1:9200/xavki/utilisateurs/_search" | jq
+```
+
+
+-> Search : une propriété <-
+
+- recherche dans une propriété spécifique (un champ)
+
+```
+curl -X GET "127.0.0.1:9200/xavki/utilisateurs/_search?q=prenom:paul" | jq
+```
+
+
+

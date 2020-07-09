@@ -1,0 +1,31 @@
+%title: ELASTIC - Plugin elastichq
+%author: xavki
+
+
+
+-> Plugin Elastic <-
+
+
+* ajout de plugin :
+
+```
+/usr/share/elasticsearch/bin/elasticsearch-plugin install list
+```
+
+<br>
+* installation docker
+
+```
+curl -fsSL https://get.docker.com | sh;
+sudo usermod -aG docker $USER
+```
+
+
+<br>
+* plugin sur dockerhub - ex : elastichq
+
+```
+docker run -d -p 5000:5000 elastichq/elasticsearch-hq
+```
+
+

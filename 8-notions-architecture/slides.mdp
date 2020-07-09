@@ -1,0 +1,63 @@
+%title: ELASTIC - Défintions
+%author: xavki
+
+
+
+
+
+
+-> Définitions d'architecture <-
+=========
+
+
+<br>
+* Cluster : ensemble de serveurs (noeuds ayant elasticsearch / même id de cluster)
+			- communication via port 9300
+			- haute dispo : perfomance et redondance
+
+<br>
+* Noeuds : serveur ayant un service elastic
+			- différents type : master, data, client...
+
+<br>
+* Index : une instance de base de données 
+			- un à plusieurs par serveur (et cluster) 
+
+<br>
+* Shards: découpage logique d'un index (un à plusieurs shards)
+			- répartition des shards sur plusieurs noeuds (répartir un index)
+			- joue sur les performances
+			- ajout d'un noeud = réaffectation des shards
+			- important pour déterminer nb max de noeuds
+
+<br>
+* Réplicas : réplicas de shards d'un index
+			- redondance
+			- mais aussi performance (interrogeables)
+
+<br>
+* requête : via API et somme des résultats de tous les shards
+
+-----------------------------------------------------------------------------------------------------------
+
+
+-> Définitions : index <-
+
+
+<br>
+* Type (table) : regroupement de documents
+		- structure n'est pas fixe mais évolutive
+		- on peut la définir par un mapping
+
+<br>
+* mapping : définition de les propriétés du type
+		- par exemple : les noms des champs, leur caractéristiques
+
+<br>
+* document : élément le plus fin (équivaut à une ligne en sql)
+		- un objet d'un type
+		- composé des propriétés du type
+
+
+
+

@@ -1,0 +1,75 @@
+%title: ELASTIC - install cluster
+%author: xavki
+
+
+
+
+
+
+-> Installation d'un cluster <-
+=========
+
+
+<br>
+* virtualbox : 2 machines de 2 G ram
+
+
+
+<br>
+* Installation :
+
+```
+sudo apt-get update
+sudo apt-get install -y default-jre apt-transport-https
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.6.0.deb
+```
+<br>
+
+* différents type de serveurs dans un cluster :
+	- data node : stock les datas, recherche, agrégation
+	- master node : en charge du cluster (configuration...)
+	- client node : transmet les requêtes (master et noeuds de datas)
+	- ingest node : preprocessing
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+-> Configuration <-
+
+
+<br>
+* Configuration : /etc/elasticsearch.elasticsearch.yml
+
+* Sur chaque serveur :
+
+```
+# nom du noeud
+node.name: <nom_serveur>
+
+# noeud éligible pour être master
+node.master: true
+
+# noeud de type data
+node.data: true
+
+# information du noeud
+network.host: 172.20.10.3
+http.port: 9200
+
+discovery.zen.ping.unicast.hosts: ["172.20.10.3", "172.20.10.4"]
+
+network.bind_host: 0.0.0.0
+```
+
+<br>
+* configuration JVM : /etc/elasticsearch/jvm.options
+
+
+* limitation de la mémoire
+```
+-Xms500m
+-Xmx500m
+```
+
+
+

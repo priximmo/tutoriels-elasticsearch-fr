@@ -1,0 +1,90 @@
+%title: ELASTIC - la recherche
+%author: xavki
+
+
+
+
+
+
+-> Search : un type <-
+=========
+
+<br>
+
+Recherche multiples éléments
+
+```
+curl -X GET "127.0.0.1:9200/xavki/utilisateurs/_search?q=prenom:paul+blog" | jq
+```
+
+<br>
+
+La même en mode 
+
+```
+curl -XGET 'http://127.0.0.1:9200/xavki/utilisateurs/_search' -d '{
+    "query":{ 
+        "match":{ 
+          "prenom" : "paul+xavier" 
+      } 
+    } 
+}'
+```
+
+-------------------------------------------------------------
+
+
+Faire une recherche multiple sur plusieurs propriétés :
+
+
+```
+curl -XGET 'http://127.0.0.1:9200/xavki/utilisateurs/_search' -d '
+{
+    "query": {
+        "multi_match" : {
+            "query" : "paul+xavier",
+            "fields" : ["prenom", "nom"]
+        }
+    }
+}'
+```
+
+-------------------------------------------------------------
+
+
+Augmenter la pondération d'une properties (x3)
+
+
+
+```
+curl -XGET 'http://127.0.0.1:9200/xavki/utilisateurs/_search' -d '
+{
+    "query": {
+        "multi_match" : {
+            "query" : "paul+xavier",
+            "fields" : ["prenom^3", "nom"]
+        }
+    }
+}'
+```
+
+------------------------------------------------------------
+
+
+
+Limiter le nombre de properties de l'output 
+
+
+```
+curl -XGET 'http://127.0.0.1:9200/xavki/utilisateurs/_search' -d '
+{
+    "query": {
+        "multi_match" : {
+            "query" : "paul+xavier",
+            "fields" : ["prenom^3", "nom"]
+        }
+    },
+    "_source" : ["prenom", "nom"]
+}'
+```
+

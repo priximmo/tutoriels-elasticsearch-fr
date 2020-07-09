@@ -1,0 +1,25 @@
+%title: ELASTIC - import fichier json
+%author: xavki
+
+
+
+
+
+
+-> Imports de masse <-
+=========
+
+<br>
+* inf à 5.6:
+
+```
+curl -XPUT -H "Content-Type: application/json" localhost:9200/_bulk --data-binary @movies_elastic.json
+```
+
+* sup à 5.6:
+
+```
+curl -XPUT localhost:9200/_bulk -H"Content-Type: application/json" --data-binary @movies_elastic.json
+```
+
+
